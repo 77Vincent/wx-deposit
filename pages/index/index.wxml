@@ -2,14 +2,22 @@
 <view class="container">
   <form bindsubmit="" bindreset="">
     <view class="section" wx:for="{{input}}" wx:for-item="item">
-      <view class="input-title">title</view>
       <view class="input-field">
         <view class="input-label">{{item.title}}</view>
-        <input id="{{item.id}}" bindblur="getValue" type="number"/>
+        <input id="{{item.id}}" value="{{}}" maxlength="12" bindinput="convert" bindblur="getValue" type="number"/>
       </view>
+      <view wx:if="{{item.line}}" class="input-line"></view>
     </view>
+
     <view>
       <button bindtap="calculate">计算</button>
+    </view>
+
+    <view class="section" wx:for="{{output}}" wx:for-item="item">
+      <view class="input-field">
+        <view class="input-label">{{item.title}}</view>
+        <input disabled value="{{result[item.id]}}" type="number"/>
+      </view>
     </view>
   </form>
 </view>
