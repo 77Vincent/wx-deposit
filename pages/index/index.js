@@ -14,22 +14,20 @@ Page({
       id: "expense",
       title: "平均月支出"
     }, {
+      id: "investmentRate",
+      title: "理财存款占比(%)",
+    }, {
       id: "incomeIncreaseRate",
-      title: "年收入增幅(%)",
-      line: true,
+      title: "收入增幅(%)",
+      switch: true,
     }, {
-      id: "interestRateY",
-      title: "理财平均年利率(%)",
+      id: "interestRate",
+      title: "理财平均利率(%)",
+      switch: true
     }, {
-      id: "interestRateM",
-      title: "理财平均月利率(%)",
-      line: true,
-    }, {
-      id: "periodY",
-      title: "存多少年"
-    }, {
-      id: "periodM",
-      title: "存多少月"
+      id: "period",
+      title: "存多久",
+      switch: true,
     }],
     output: [{
       id: "deposit",
@@ -39,35 +37,26 @@ Page({
       title: "总利息"
     }],
   },
-  convert(e) {
-    if (e.currentTarget.id === "interestRateY") {
-      this.setData({
-        jjj: e.detail.value 
-      });
-    }
-  },
   userInput: {},
   getValue(e) {
     this.userInput[e.currentTarget.id] = e.detail.value;
   },
   calculate() {
-    let de = this.userInput.deposit;
-    let sa = this.userInput.save;
-    let ex = this.userInput.expense;
+    let dep = this.userInput.deposit;
+    let sav = this.userInput.save;
+    let exp = this.userInput.expense;
     let iir = this.userInput.incomeIncreaseRate;
-    let iry = this.userInput.interestRateY;
-    let irm = this.userInput.interestRateM;
-    let py = this.userInput.periodY;
-    let pm = this.userInput.periodM;
+    let ir = this.userInput.interestRate;
+    let pm = this.userInput.period;
 
     for (let i = 0; i < pm; i++) {
-      de = de * (1 + irm / 100) + sa;
+      dep = dep * (1 + ir / 100) + sav - exp;
     }
 
     this.setData({
       result: {
-        deposit: de,
-        interest: de - this.userInput.deposit,
+        deposit: dep,
+        interest: dep - this.userInput.deposit,
       }
     });
   },

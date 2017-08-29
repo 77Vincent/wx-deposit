@@ -1,20 +1,24 @@
 <!--index.wxml-->
 <view class="container">
-  <form bindsubmit="" bindreset="">
+  <view class="row global-tips">以下单位默认为年，点击切换为月</view>
+
+  <form class="row" bindsubmit="" bindreset="">
     <view class="section" wx:for="{{input}}" wx:for-item="item">
-      <view class="input-field">
-        <view class="input-label">{{item.title}}</view>
-        <input id="{{item.id}}" value="{{}}" maxlength="12" bindinput="convert" bindblur="getValue" type="number"/>
+      <view class="field">
+        <label class="field-label">{{item.title}}</label>
+        <switch wx:if="{{item.switch}}" bindchange=""/>
+        <input id="{{item.id}}" maxlength="13" bindblur="getValue" type="number"/>
       </view>
-      <view wx:if="{{item.line}}" class="input-line"></view>
+
+      <view wx:if="{{item.tips}}" class="input-tips">{{item.tips}}</view>
     </view>
 
     <view>
-      <button bindtap="calculate">计算</button>
+      <button class="btn-calculate" bindtap="calculate">计算</button>
     </view>
 
     <view class="section" wx:for="{{output}}" wx:for-item="item">
-      <view class="input-field">
+      <view class="field">
         <view class="input-label">{{item.title}}</view>
         <input disabled value="{{result[item.id]}}" type="number"/>
       </view>

@@ -1,3 +1,6 @@
+page {
+}
+
 .container {
   padding: 15px;
 }
@@ -6,54 +9,42 @@
   margin: 7px 0;
 }
 
-form {
+.row {
   width: 100%;
-  font-size: 0.85em;
+  box-sizing: border-box;
 }
 
-.input-field {
+form {
+  font-size: 14px;
+}
+
+.field {
   display: flex;
   display: -webkit-flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 
-.input-label {
-  flex: 3;
-  align-items: center;
-  color: #202020;
-}
-
-.input-line {
-  height: 1px;
-  background-color: lightgray;
-  margin-top: 7px;
+.field-label {
+  flex: 1;
 }
 
 input {
-  flex: 2;
+  width: 120px;
   border: 1px solid lightgray;
   border-radius: 3px;
-  padding: 1px 3px;
+  padding: 0px 2px;
 }
 
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.global-tips {
+  text-align: left;
+  background-color: #f8f8f8;
+  margin-top: 7px;
+  padding: 7px;
+  font-size: 12px;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
+.btn-calculate {
+  letter-spacing: 5px;
 }
