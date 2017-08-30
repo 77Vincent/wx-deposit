@@ -41,23 +41,34 @@ Page({
   getValue(e) {
     this.userInput[e.currentTarget.id] = e.detail.value;
   },
-  calculate(d, i, e, c, r, p) {
-    let dep = d;
+  calculate(dep, inc, exp, mr, iir, ir, per) {
+    dep = dep ? dep : 0;
+    inc = inc ? inc : 0;
+    exp = exp ? exp : 0;
+    mr = mr ? mr : 100;
+    iir = iir ? iir : 0;
+    ir = ir ? ir : 0;
+    per = per ? per : 0;
+
+    let d = dep;
     
-    for (let ind = 0; ind < p; ind++) {
-      dep = dep * (1 + r / 100) + i - e;
+    for (let ind = 0; ind < per * 12; ind++) {
+      d = d * (1 * mr/100 + ir/100) + inc - exp;
     }
+
+    console.log(d)
     
     return {
-      deposit: dep,
-      interest: dep - d
+      deposit: d,
+      interest: d - dep 
     };
   },
   confirm() {
     let ui = this.userInput;
+    console.log(ui)
     
     this.setData({
-      result: this.calculate(ui.deposit, ui.income, ui.expense, ui.incomeIncreaseRate, ui.interestRate, ui.period);
+      result: this.calculate(ui.deposit, ui.income, ui.expense, ui.investmentRate, ui.incomeIncreaseRate, ui.interestRate, ui.period)
     });
   },
   onLoad() {

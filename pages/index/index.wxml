@@ -14,7 +14,7 @@
     </view>
 
     <view>
-      <button class="btn-calculate" bindtap="calculate">计算</button>
+      <button class="btn-calculate" bindtap="confirm">计算</button>
     </view>
 
     <view class="section" wx:for="{{output}}" wx:for-item="item">
