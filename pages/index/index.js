@@ -8,7 +8,7 @@ Page({
       id: "deposit",
       title: "现存款"
     }, {
-      id: "save",
+      id: "income",
       title: "平均月收入"
     }, {
       id: "expense",
@@ -41,23 +41,23 @@ Page({
   getValue(e) {
     this.userInput[e.currentTarget.id] = e.detail.value;
   },
-  calculate() {
-    let dep = this.userInput.deposit;
-    let sav = this.userInput.save;
-    let exp = this.userInput.expense;
-    let iir = this.userInput.incomeIncreaseRate;
-    let ir = this.userInput.interestRate;
-    let pm = this.userInput.period;
-
-    for (let i = 0; i < pm; i++) {
-      dep = dep * (1 + ir / 100) + sav - exp;
+  calculate(d, i, e, c, r, p) {
+    let dep = d;
+    
+    for (let ind = 0; ind < p; ind++) {
+      dep = dep * (1 + r / 100) + i - e;
     }
-
+    
+    return {
+      deposit: dep,
+      interest: dep - d
+    };
+  },
+  confirm() {
+    let ui = this.userInput;
+    
     this.setData({
-      result: {
-        deposit: dep,
-        interest: dep - this.userInput.deposit,
-      }
+      result: this.calculate(ui.deposit, ui.income, ui.expense, ui.incomeIncreaseRate, ui.interestRate, ui.period);
     });
   },
   onLoad() {
