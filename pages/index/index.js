@@ -18,20 +18,17 @@ Page({
       title: "理财存款占比(%)",
     }, {
       id: "incomeIncreaseRate",
-      title: "收入增幅(%)",
-      switch: true,
+      title: "收入年增幅(%)",
     }, {
       id: "interestRate",
-      title: "理财平均利率(%)",
-      switch: true
+      title: "理财平均年利率(%)",
     }, {
       id: "period",
-      title: "存多久",
-      switch: true,
+      title: "存多久(年)",
     }],
     output: [{
       id: "deposit",
-      title: "总存款"
+      title: "总存款(含利息)"
     }, {
       id: "interest",
       title: "总利息"
@@ -39,33 +36,39 @@ Page({
   },
   userInput: {},
   getValue(e) {
-    this.userInput[e.currentTarget.id] = e.detail.value;
+    this.userInput[e.currentTarget.id] = Number(e.detail.value);
   },
-  calculate(dep, inc, exp, mr, iir, ir, per) {
-    dep = dep ? dep : 0;
-    inc = inc ? inc : 0;
-    exp = exp ? exp : 0;
-    mr = mr ? mr : 100;
-    iir = iir ? iir : 0;
-    ir = ir ? ir : 0;
-    per = per ? per : 0;
+  calculate(dep=0, inc=0, exp=0, mr=100, iir=0, ir=0, per=0) {
 
-    let d = dep;
-    
-    for (let ind = 0; ind < per * 12; ind++) {
-      d = d * (1 * mr/100 + ir/100) + inc - exp;
+    iir = iir / 100;
+    ir = ir / 100;
+
+    let iirA = 0;
+    let irA = 0;
+    let siA = 0;
+
+    for (let ind = 0; ind < per; ind++) {
+      iirA = iirA + Math.pow((1 + iir), ind);
+      irA = irA + Math.pow(ir, ind + 1);
+
+      if (ind === 0) {
+        siA = 0;
+      } else {
+        siA = siA + (inc * Math.pow(iir, ind - 1) - exp) * Math.pow(ir, ind);
+      }
     }
 
-    console.log(d)
-    
+    let base = 12 * (inc * iirA - exp * per) + dep;
+    let interest = dep * (irA + ir * (per - 1)) + 12 * siA;
+
+
     return {
-      deposit: d,
-      interest: d - dep 
+      deposit: Math.round(base + interest),
+      interest: Math.round(interest)
     };
   },
   confirm() {
     let ui = this.userInput;
-    console.log(ui)
     
     this.setData({
       result: this.calculate(ui.deposit, ui.income, ui.expense, ui.investmentRate, ui.incomeIncreaseRate, ui.interestRate, ui.period)

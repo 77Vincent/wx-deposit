@@ -6,7 +6,6 @@
     <view class="section" wx:for="{{input}}" wx:for-item="item">
       <view class="field">
         <label class="field-label">{{item.title}}</label>
-        <switch wx:if="{{item.switch}}" bindchange=""/>
         <input id="{{item.id}}" maxlength="13" bindblur="getValue" type="number"/>
       </view>
 
