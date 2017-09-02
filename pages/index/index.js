@@ -36,18 +36,19 @@ Page({
   },
   userInput: {},
   getValue(e) {
-    this.userInput[e.currentTarget.id] = Number(e.detail.value);
+    this.userInput[e.currentTarget.id] = e.detail.value === "" ? undefined : Number(e.detail.value);
   },
-  calculate(dep=0, inc=0, exp=0, mr=100, iir=0, ir=0, per=0) {
+  calculate(d=0, inc=0, exp=0, imr=100, iir=0, ir=0, p=0) {
 
     iir = iir / 100;
     ir = ir / 100;
+    imr = imr / 100;
 
     let iirA = 0;
     let irA = 0;
     let siA = 0;
 
-    for (let ind = 0; ind < per; ind++) {
+    for (let ind = 0; ind < p; ind++) {
       iirA = iirA + Math.pow((1 + iir), ind);
       irA = irA + Math.pow(ir, ind + 1);
 
@@ -58,9 +59,8 @@ Page({
       }
     }
 
-    let base = 12 * (inc * iirA - exp * per) + dep;
-    let interest = dep * (irA + ir * (per - 1)) + 12 * siA;
-
+    let base = 12 * (inc * iirA - exp * p) + d;
+    let interest = d * imr * (irA + ir * (p - 1)) + 12 * siA * imr;
 
     return {
       deposit: Math.round(base + interest),

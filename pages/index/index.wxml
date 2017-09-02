@@ -1,7 +1,5 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="row global-tips">以下单位默认为年，点击切换为月</view>
-
   <form class="row" bindsubmit="" bindreset="">
     <view class="section" wx:for="{{input}}" wx:for-item="item">
       <view class="field">
