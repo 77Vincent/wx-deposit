@@ -1,8 +1,10 @@
 page {
+  height: 100%;
 }
 
 .container {
-  padding: 15px;
+  padding: 30rpx;
+  justify-content: flex-start;
 }
 
 .section {
@@ -24,6 +26,7 @@ form {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  min-height: 27px;
 }
 
 .field-label {
@@ -37,6 +40,12 @@ input {
   padding: 0px 2px;
 }
 
+.output-container {
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  padding: 0px 12px;
+}
+
 .global-tips {
   text-align: left;
   background-color: #f8f8f8;
@@ -45,6 +54,8 @@ input {
   font-size: 12px;
 }
 
-.btn-calculate {
-  letter-spacing: 5px;
+.footer {
+  width: 100%;
+  background-color: #f8f8f8;
+  font-size: 12px;
 }

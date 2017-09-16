@@ -1,10 +1,12 @@
 <!--index.wxml-->
 <view class="container">
+  <view class="global-tips"></view>
+
   <form class="row" bindsubmit="" bindreset="">
     <view class="section" wx:for="{{input}}" wx:for-item="item">
       <view class="field">
         <label class="field-label">{{item.title}}</label>
-        <input id="{{item.id}}" maxlength="13" bindblur="getValue" type="number"/>
+        <input id="{{item.id}}" placeholder="{{item.placeholder}}" maxlength="13" bindblur="getValue" type="number"/>
       </view>
 
       <view wx:if="{{item.tips}}" class="input-tips">{{item.tips}}</view>
@@ -14,10 +16,12 @@
       <button class="btn-calculate" bindtap="confirm">计算</button>
     </view>
 
-    <view class="section" wx:for="{{output}}" wx:for-item="item">
-      <view class="field">
-        <view class="input-label">{{item.title}}</view>
-        <input disabled value="{{result[item.id]}}" type="number"/>
+    <view hidden="{{done}}" class="output-container">
+      <view class="section" wx:for="{{output}}" wx:for-item="item">
+        <view class="field">
+          <view class="input-label">{{item.title}}</view>
+          <view>{{result[item.id]}}</view>
+        </view>
       </view>
     </view>
   </form>
