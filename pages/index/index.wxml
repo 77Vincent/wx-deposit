@@ -1,15 +1,14 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="global-tips"></view>
-
   <form class="row" bindsubmit="" bindreset="">
     <view class="section" wx:for="{{input}}" wx:for-item="item">
       <view class="field">
         <label class="field-label">{{item.title}}</label>
+        <label class="tips" bindtap="showTips"></label>
         <input id="{{item.id}}" placeholder="{{item.placeholder}}" maxlength="13" bindblur="getValue" type="number"/>
       </view>
 
-      <view wx:if="{{item.tips}}" class="input-tips">{{item.tips}}</view>
+      <view hidden="{{tipsStatus[item.id]}}" class="input-tips">{{item.tips}}</view>
     </view>
 
     <view>

@@ -5,8 +5,8 @@
   "window":{
     "backgroundTextStyle":"light",
     "backgroundColor": "#000",
-    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarBackgroundColor": "#384A7A",
     "navigationBarTitleText": "挣多少",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   }
 }
